@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="VisualizerExamples.DebuggerVisualizer.WebResponse.WPF.WebResponseVisualizerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels1="clr-namespace:VisualizerExamples.DebuggerVisualizer.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500"             
+             Height="500" MinWidth="500"
+             d:DataContext="{d:DesignInstance Type=viewModels1:ResponseViewModel, IsDesignTimeCreatable=False}">
+    <Grid>
+        <Grid.Resources>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <!--<StackPanel Orientation="Horizontal" Margin="5">
+                <Label Margin="0 0 5 0" Padding="0">Response URI:</Label>
+                <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ResponseUri, Mode=OneWay}"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Margin="0 0 5 0" Padding="0">Content Type:</Label>
+                <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ContentType, Mode=OneWay}"></TextBlock>
+            </StackPanel>-->
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Margin="0 0 5 0" Padding="0">Raw Response:</Label>
+                <ScrollViewer MinWidth="400px" Width="auto" MaxHeight="200">
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=RawResponse, Mode=OneTime}"></TextBlock>
+                </ScrollViewer>
+            </StackPanel>
+            <!--<StackPanel Orientation="Horizontal" Margin="5">
+                <Label Margin="0 0 5 0" Padding="0">Response:</Label>
+                <WebBrowser wpfValueConverters:BrowserBehavior.Html="{Binding Path=RawResponse}" MinWidth="400px" Width="auto" MaxHeight="200" />
+            </StackPanel>-->
+        </StackPanel>
+    </Grid>
+</UserControl>
