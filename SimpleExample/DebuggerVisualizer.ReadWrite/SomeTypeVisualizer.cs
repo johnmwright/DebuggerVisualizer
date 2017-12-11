@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace SimpleExample.DebuggerVisualizer.ReadWrite
@@ -23,14 +24,26 @@ namespace SimpleExample.DebuggerVisualizer.ReadWrite
             var data = objectProvider.GetObject() as SimpleExample.SomeType;
 
            
-            // Display your view of the object.
-            //       Replace displayForm with your own custom Form or Control.
+            // Display your view of the object.        
             using (var displayForm = new SomeTypeVisualizerForm(data))
             {
-                //displayForm.OnChange += (object sender, SimpleExample.SomeType newObject) => objectProvider.TransferObject(newObject);
-                displayForm.OnChange += (object sender, SimpleExample.SomeType newObject) => objectProvider.ReplaceObject(newObject);
-
                 displayForm.txtFoo.Text = data.Foo;
+
+
+                // Read-Write Approach 1: Using ReplaceObject
+                //displayForm.OnChange += (sender, newObject) => objectProvider.ReplaceObject(newObject);
+
+                // Read-Write Approach 2: Using TransferData
+                displayForm.OnChange += (sender, newObject) =>
+                {
+                    var response = objectProvider.TransferObject(newObject) as string;
+                    if (!string.IsNullOrEmpty(response))
+                    {
+                        MessageBox.Show(response, "Response", MessageBoxButtons.OK);
+                    }
+
+                };
+                
                 windowService.ShowDialog(displayForm);
             }
         }
