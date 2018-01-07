@@ -48,7 +48,7 @@
             this.txtFoo.ReadOnly = true;
             this.txtFoo.Size = new System.Drawing.Size(205, 20);
             this.txtFoo.TabIndex = 1;
-            this.txtFoo.TextChanged += new System.EventHandler(this.txtFoo_TextChanged);
+            
             // 
             // SomeTypeVisualizerWithViewModelForm
             // 
