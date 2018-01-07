@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:VisualizerExamples.DebuggerVisualizer.ViewModels"
+             xmlns:wpf="clr-namespace:VisualizerExamples.DebuggerVisualizer.WebResponse.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500"             
-             MinWidth="500" MinHeight="500" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-             d:DataContext="{d:DesignInstance Type=viewModels:WebExceptionViewModel, IsDesignTimeCreatable=False}"
-             Padding="5" Margin="5">
+             d:DesignHeight="700" d:DesignWidth="700"             
+             MinWidth="500" MinHeight="500" 
+             Width="700" Height="700"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             d:DataContext="{d:DesignInstance Type=viewModels:WebExceptionViewModel, IsDesignTimeCreatable=False}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" MinWidth="500"/>
@@ -21,20 +23,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="0 5" Grid.Row="0">
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
             <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Message:</Label>
-         
-           <TextBlock TextWrapping="Wrap" Text="{Binding Path=Message, Mode=OneWay}" Height="auto" />
-         
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Message, Mode=OneWay}" Height="auto" />
         </StackPanel>
+        
         <!--<StackPanel Orientation="Horizontal" Margin="5">
                 <Label Margin="0 0 5 0" Padding="0">Status:</Label>
                 <TextBlock TextWrapping="Wrap" Text="{Binding Path=Status, Mode=OneWay}"></TextBlock>
             </StackPanel>-->
 
-        <Label  Grid.Row="1" Margin="0 5" Padding="0" FontWeight="Bold">Stack Trace:</Label>
-        
-        <ScrollViewer  Grid.Row="2"   VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
+        <Label  Grid.Row="1" Margin="5" Padding="0" FontWeight="Bold">Stack Trace:</Label>
+        <ScrollViewer  Grid.Row="2" Margin="15 0 0 0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
             <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=StackTrace, Mode=OneWay}"></TextBlock>
         </ScrollViewer>
         
@@ -42,15 +42,16 @@
                 <Label Margin="0 0 5 0" Padding="0">Has Response:</Label>
                 <CheckBox  IsChecked="{Binding Path=HasResponse, Mode=OneWay}" />
             </StackPanel>-->
-        <!--<StackPanel Orientation="Horizontal" Margin="0 5">
-                <webResponse:WebResponseVisualizerControl DataContext="{Binding Path=Response, Mode=OneWay}"></webResponse:WebResponseVisualizerControl>
-            </StackPanel>-->
         
-            <Label Margin="0 0 5 0" Padding="0 5" FontWeight="Bold" Grid.Row="3">Raw Response:</Label>
+        
+            <wpf:WebResponseVisualizerControl DataContext="{Binding Path=Response, Mode=OneWay}" Grid.Row="3" />
+        
+            <!--<Label Margin="0 0 5 0" Padding="0 5" FontWeight="Bold" Grid.Row="3">Raw Response:</Label>
             <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" Grid.Row="4">
                 <TextBlock TextWrapping="NoWrap" Text="{Binding Path=Response.RawResponse, Mode=OneWay}" Width="Auto"></TextBlock>
-            </ScrollViewer>
+            </ScrollViewer>-->
         
 
     </Grid>
 </UserControl>
+

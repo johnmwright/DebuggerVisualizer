@@ -8,9 +8,18 @@ namespace VisualizerExamples.DebuggerVisualizer.WebResponse.WPF
     {
         public override void GetData(object target, Stream outgoingData)
         {
-            var originalObj = target as System.Net.WebResponse;
-            var viewModel = new ResponseViewModel(originalObj);
-       
+            ResponseViewModel viewModel;
+
+            if (target is System.Net.HttpWebResponse) 
+            {
+                 viewModel = new ResponseViewModel((System.Net.HttpWebResponse)target);
+            }
+            else
+            {
+                var originalObj = target as System.Net.WebResponse;
+                viewModel = new ResponseViewModel(originalObj);
+            }
+
             base.GetData(viewModel, outgoingData);
         }
     }

@@ -6,37 +6,55 @@
              xmlns:viewModels1="clr-namespace:VisualizerExamples.DebuggerVisualizer.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500"             
-             Height="500" MinWidth="500"
+             Height="700" MinWidth="700"
              d:DataContext="{d:DesignInstance Type=viewModels1:ResponseViewModel, IsDesignTimeCreatable=False}">
     <Grid>
-        <Grid.Resources>
-        </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="*" MinWidth="500"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical">
-            <!--<StackPanel Orientation="Horizontal" Margin="5">
-                <Label Margin="0 0 5 0" Padding="0">Response URI:</Label>
-                <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ResponseUri, Mode=OneWay}"></TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Margin="0 0 5 0" Padding="0">Content Type:</Label>
-                <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ContentType, Mode=OneWay}"></TextBlock>
-            </StackPanel>-->
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Margin="0 0 5 0" Padding="0">Raw Response:</Label>
-                <ScrollViewer MinWidth="400px" Width="auto" MaxHeight="200">
-                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=RawResponse, Mode=OneTime}"></TextBlock>
-                </ScrollViewer>
-            </StackPanel>
-            <!--<StackPanel Orientation="Horizontal" Margin="5">
+
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Status Code:</Label>
+            <TextBlock TextWrapping="Wrap"   Text="{Binding Path=StatusCodeDesc, Mode=OneWay}"></TextBlock>
+            <TextBlock TextWrapping="Wrap"   Text="{Binding Path=StatusCode, Mode=OneWay}"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5"  Grid.Row="1">
+            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Response URI:</Label>
+            <TextBlock TextWrapping="Wrap"   Text="{Binding Path=Method, Mode=OneWay}"></TextBlock>
+            <TextBlock TextWrapping="Wrap" Margin="5 0 0 0"   Text="{Binding Path=ResponseUri, Mode=OneWay}"></TextBlock>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5"  Grid.Row="2">
+            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Content Type:</Label>
+            <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ContentType, Mode=OneWay}"></TextBlock>
+            <Label Margin="10 0 5 0" Padding="0" FontWeight="Bold">Content Length:</Label>
+            <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ContentLength, Mode=OneWay}"></TextBlock>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="5 0 0 5" >
+            <Label Padding="0" FontWeight="Bold">Response:</Label>
+            <Button Name="btnResponseRaw" ToolTip="Raw Text" Margin="5 0 0 0" Width="15" IsDefault="False" IsCancel="False" IsEnabled="False" Click="BtnResponseRaw_OnClick" ><Image Source="raw.png" /></Button>
+            <Button Name="btnResponseWeb" ToolTip="HTML Rendered" Margin="5 0 0 0" Width="15" IsDefault="False" IsCancel="False" IsEnabled="True" Click="BtnResponseWeb_OnClick"><Image Source="browser2.png" /></Button>
+        </StackPanel>
+        
+        <ScrollViewer Margin="15 0 0 0" MinWidth="400px" MaxHeight="200px" Grid.Row="4" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
+            <TextBlock Name="txtResponse" Visibility="Visible" Width="Auto" TextWrapping="Wrap" Text="{Binding Path=RawResponse, Mode=OneTime}" />
+        </ScrollViewer>
+        <WebBrowser Name="webResposne" Visibility="Collapsed"  MinWidth="400px" Width="auto" MaxHeight="200px" Margin="15 0 0 0"  Grid.Row="4" />
+        <!--wpfValueConverters:BrowserBehavior.Html="{Binding Path=RawResponse}"-->
+
+        <!--<StackPanel Orientation="Horizontal" Margin="5">
                 <Label Margin="0 0 5 0" Padding="0">Response:</Label>
                 <WebBrowser wpfValueConverters:BrowserBehavior.Html="{Binding Path=RawResponse}" MinWidth="400px" Width="auto" MaxHeight="200" />
             </StackPanel>-->
-        </StackPanel>
+
     </Grid>
 </UserControl>

@@ -3,13 +3,13 @@ using Microsoft.VisualStudio.DebuggerVisualizers;
 
 namespace SimpleExample.DebuggerVisualizer.ReadOnly
 {
-    
     /// <summary>
     /// A Visualizer for SomeType.  
     /// </summary>
     public class SomeTypeVisualizer : DialogDebuggerVisualizer
     {
-        protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
+        protected override void Show(IDialogVisualizerService windowService, 
+                                     IVisualizerObjectProvider objectProvider)
         {
             if (windowService == null)
                 throw new ArgumentNullException(nameof(windowService));
@@ -21,16 +21,14 @@ namespace SimpleExample.DebuggerVisualizer.ReadOnly
             //       Cast the result of objectProvider.GetObject() 
             //       to the type of the object being visualized.
             var data = objectProvider.GetObject() as SimpleExample.SomeType;
-
-           
+            
             // Display your view of the object.       
             using (var displayForm = new SomeTypeVisualizerForm())
             {
-                displayForm.Load += (sender, args) => displayForm.txtFoo.Text = data.Foo;
-                displayForm.txtFoo.Text = data.Foo;
+                displayForm.Load += (sender, args) => displayForm.txtFoo.Text = data.Foo;                
                 windowService.ShowDialog(displayForm);
             }
-        }
-        
+        }        
     }
 }
+

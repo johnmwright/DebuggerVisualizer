@@ -31,6 +31,6 @@ namespace VisualizerExamples.DebuggerVisualizer.ViewModels
         public string StackTrace => _exception.ToString();
 
         public string Status => _exception.Status.ToString();
-
+       
     }
 }

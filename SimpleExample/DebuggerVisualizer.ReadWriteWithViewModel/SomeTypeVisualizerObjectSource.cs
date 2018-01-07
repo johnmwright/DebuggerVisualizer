@@ -2,9 +2,9 @@
 using System.IO;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 
-namespace SimpleExample.DebuggerVisualizer.ReadWrite
+namespace SimpleExample.DebuggerVisualizer.ReadWriteWithViewModel
 {
-    public class SomeTypeVisualizerObjectSource : VisualizerObjectSource
+    public class SomeTypeVisualizerWithViewModelObjectSource : VisualizerObjectSource
     {
         public override void GetData(object target, Stream outgoingData)
         {
@@ -13,22 +13,27 @@ namespace SimpleExample.DebuggerVisualizer.ReadWrite
 
         public override void TransferData(object target, Stream incomingData, Stream outgoingData)
         {
-            var originalObject = (SomeType)target;
+            Debugger.Launch();
+
+            var originalObject = target as SimpleExample.SomeType;
            
-            var incomingChangedText = (string)Deserialize(incomingData);
+            var incomingChangedObject = Deserialize(incomingData) as SimpleExample.SomeType;
 
             // any changes to the object must be applied to the incoming target object instance
-            originalObject.Foo = incomingChangedText;
-  
+            originalObject.Foo = incomingChangedObject.Foo;
+            Debugger.Break();
+                
             //(optional) send a response message back to the Visualizer
             Serialize(outgoingData, "It worked!");            
         }
 
         public override object CreateReplacementObject(object target, Stream incomingData)
         {
-            var originalObject = (SomeType)target;
+            Debugger.Launch();
 
-            var incomingChangedObject = (SomeType)Deserialize(incomingData);
+            var originalObject = target as SimpleExample.SomeType;
+
+            var incomingChangedObject = Deserialize(incomingData) as SimpleExample.SomeType;
             // if this is a ViewModel, you'll need to map the value into either a new instance of 
             // the visualized type, or modify the originalObject with the ViewModel's values and return
             // the originalObject as the new instance.

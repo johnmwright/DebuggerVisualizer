@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net;
 using SimpleExample;
 using SimpleExample.DebuggerVisualizer;
+using SimpleExample.DebuggerVisualizer.ReadOnlyWithViewModel;
 using ReadOnly =SimpleExample.DebuggerVisualizer.ReadOnly;
 using ReadWrite = SimpleExample.DebuggerVisualizer.ReadWrite;
 using VisualizerExamples.DebuggerVisualizer.Exception;
@@ -20,10 +21,10 @@ namespace DebuggerVisualizer.TestHarness
         static void Main(string[] args)
         {
 
-            //Web();
+            Web();
 
             TestShowObjectVisualizer(new SomeType() { Foo = "Foo bar" });
-
+            
             TestShowEditableObjectVisualizer(new SomeType() { Foo = "Foo bar" });
 
             TestShowExceptionVisualizer(new WebException("this broke"));
@@ -55,17 +56,19 @@ namespace DebuggerVisualizer.TestHarness
                     
                     var error404Url = "http://wrightfully.com/notreal";
 
-                    var response = client.DownloadString(xmlUrl);               
+                    var response = client.DownloadString(error404Url);               
                     Debugger.Break();                        
                 }                
             }
             catch (WebException ex)
             {
                 Debugger.Break();
-
-                VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(ex, typeof(SimpleWebExceptionVisualizer), typeof(WebExceptionVisualObjectSource));
+                //VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(ex, typeof(SimpleWebExceptionVisualizer), typeof(WebExceptionVisualObjectSource));
+                VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(ex, typeof(WpfWebExceptionVisualizer), typeof(WebExceptionVisualObjectSource));
                 visualizerHost.ShowVisualizer();
 
+
+                
             }
             catch (Exception ex)
             {
@@ -77,13 +80,28 @@ namespace DebuggerVisualizer.TestHarness
         
         public static void TestShowObjectVisualizer(object objectToVisualize)
         {
-            VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(ReadOnly.SomeTypeVisualizer));
+            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize, 
+                                                               visualizer: typeof(ReadOnly.SomeTypeVisualizer));
             visualizerHost.ShowVisualizer();
         }
 
+
+        public static void TestShowObjectVisualizerWithObjectSource(object objectToVisualize)
+        {
+            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize,
+                                                               visualizer: typeof(SomeNonSerializableTypeVisualizer),
+                                                               visualizerObjectSource: typeof(SomeNonSerializableTypeVisualObjectSource));
+            visualizerHost.ShowVisualizer();
+        }
+
+
+
         public static void TestShowEditableObjectVisualizer(object objectToVisualize)
         {
-            VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(ReadWrite.SomeTypeVisualizer), typeof(ReadWrite.SomeTypeVisualizerObjectSource));
+            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize, 
+                                                               visualizer: typeof(ReadWrite.SomeTypeVisualizer), 
+                                                               visualizerObjectSource: typeof(ReadWrite.SomeTypeVisualizerObjectSource),
+                                                               replacementOK: true);
             visualizerHost.ShowVisualizer();
         }
 
@@ -96,7 +114,9 @@ namespace DebuggerVisualizer.TestHarness
 
         public static void TestShowWpfExceptionVisualizer(object objectToVisualize)
         {
-            VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(WpfWebExceptionVisualizer), typeof(WebExceptionVisualObjectSource));
+            VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, 
+                typeof(WpfWebExceptionVisualizer), 
+                typeof(WebExceptionVisualObjectSource));
             visualizerHost.ShowVisualizer();
         }
     }

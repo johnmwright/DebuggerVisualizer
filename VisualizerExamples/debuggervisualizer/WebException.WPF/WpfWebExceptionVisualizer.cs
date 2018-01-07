@@ -38,6 +38,8 @@ namespace VisualizerExamples.DebuggerVisualizer.WebException.WPF
                 Title = "WPF Web Exception Visualizer",
                 MinWidth = 500,
                 MinHeight = 500,
+                Width = 700,
+                Height = 700,
                 Padding = new Thickness(5),
                 Margin = new Thickness(5),
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
