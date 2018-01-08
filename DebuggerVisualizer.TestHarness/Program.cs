@@ -61,7 +61,7 @@ namespace DebuggerVisualizer.TestHarness
 
                     var xmlUrl = "http://api.wordnik.com/v4/words.xml/randomWords?hasDictionaryDef=false&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
                     
-                    var error404Url = "http://wrightfully.com/notreal";
+                    var error404Url = "https://wrightfully.com/notreal";
 
                     var response = client.DownloadString(error404Url);               
                     Debugger.Break();                        
@@ -69,13 +69,8 @@ namespace DebuggerVisualizer.TestHarness
             }
             catch (WebException ex)
             {
-                Debugger.Break();
-                //VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(ex, typeof(SimpleWebExceptionVisualizer), typeof(WebExceptionVisualObjectSource));
                 VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(ex, typeof(WpfWebExceptionVisualizer), typeof(WebExceptionVisualObjectSource));
-                visualizerHost.ShowVisualizer();
-
-
-                
+                visualizerHost.ShowVisualizer();             
             }
             catch (Exception ex)
             {

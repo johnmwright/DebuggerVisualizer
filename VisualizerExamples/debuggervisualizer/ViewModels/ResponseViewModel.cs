@@ -1,7 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
+using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace VisualizerExamples.DebuggerVisualizer.ViewModels
 {
@@ -9,10 +12,11 @@ namespace VisualizerExamples.DebuggerVisualizer.ViewModels
     public class ResponseViewModel
     {
 
-        public ResponseViewModel(System.Net.HttpWebResponse httpResponse) : this((System.Net.WebResponse)httpResponse)
+        public ResponseViewModel(System.Net.HttpWebResponse httpResponse) 
+            : this((System.Net.WebResponse)httpResponse)
         {
             StatusCode = (int)httpResponse.StatusCode;       
-            StatusCodeDesc = httpResponse.StatusCode.ToString();
+            StatusCodeDesc = httpResponse.StatusDescription;
             Method = httpResponse.Method;        
         }
 
@@ -23,7 +27,7 @@ namespace VisualizerExamples.DebuggerVisualizer.ViewModels
             ContentType = response.ContentType;
             ResponseUri = response.ResponseUri.ToString();
 
-            RawResponse = ReadResponseStream(response);
+            RawResponse = ReadResponseStream(response);            
         }
 
         private string ReadResponseStream(System.Net.WebResponse response)
@@ -57,6 +61,8 @@ namespace VisualizerExamples.DebuggerVisualizer.ViewModels
         public string ContentType { get; } 
         public string ResponseUri { get; } 
         public string RawResponse { get; }
+       
+
         public string StatusCodeDesc { get; }
         public int StatusCode { get; }
         public string Method { get; }

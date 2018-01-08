@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Highlighting;
 using VisualizerExamples.DebuggerVisualizer.ViewModels;
 
 namespace VisualizerExamples.DebuggerVisualizer.WebResponse.WPF
@@ -12,27 +16,63 @@ namespace VisualizerExamples.DebuggerVisualizer.WebResponse.WPF
         public WebResponseVisualizerControl()
         {
             InitializeComponent();
-            
+            DataContextChanged += OnDataContextChanged;
         }
 
-        private void BtnResponseRaw_OnClick(object sender, RoutedEventArgs e)
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            btnResponseRaw.IsEnabled = false;
-            btnResponseWeb.IsEnabled = true;
-            txtResponse.Visibility = Visibility.Visible;
-            webResposne.Visibility = Visibility.Collapsed;
+            if (DataContext is ResponseViewModel responseVM)
+            {
+                var highlightType = GetHighlightingType(responseVM.ContentType);               
+                txtResponse.SyntaxHighlighting = highlightType;
+                txtResponse.Text = responseVM.RawResponse;
+            }
+            else
+            {
+                txtResponse.Document = null;
+            }
         }
 
-        private void BtnResponseWeb_OnClick(object sender, RoutedEventArgs e)
+        public IHighlightingDefinition GetHighlightingType(string contentType)
         {
-            btnResponseRaw.IsEnabled = true;
-            btnResponseWeb.IsEnabled = false;
-            txtResponse.Visibility = Visibility.Collapsed;
-            webResposne.Visibility = Visibility.Visible;
+  
+            var contextType = contentType?.Split(';').FirstOrDefault() ?? "";
 
-            var responseVM = DataContext as ResponseViewModel;
-            
-            webResposne.NavigateToString(responseVM?.RawResponse ?? "");
+            string typeName = null;
+
+            if (contextType.EndsWith("html", StringComparison.OrdinalIgnoreCase))
+                typeName = "HTML";
+
+            if (contextType.EndsWith("json", StringComparison.OrdinalIgnoreCase))
+                typeName = "JavaScript";
+
+
+            if (contextType.EndsWith("xml", StringComparison.OrdinalIgnoreCase))
+                typeName = "XML";
+
+            if (contextType.EndsWith("svg", StringComparison.OrdinalIgnoreCase))
+                typeName = "XML";
+
+
+            if (contextType.EndsWith("css", StringComparison.OrdinalIgnoreCase))
+                typeName = "CSS";
+
+            return typeName == null
+                ? null
+                : HighlightingManager.Instance.GetDefinition(typeName);
+        }
+    
+        
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tabControl = sender as TabControl;
+            var selected = tabControl.SelectedItem as TabItem;
+            if (selected == tabBrowser)
+            {
+                var responseVM = DataContext as ResponseViewModel;
+
+                webResposne.NavigateToString(responseVM?.RawResponse ?? "");
+            }
         }
     }
 }

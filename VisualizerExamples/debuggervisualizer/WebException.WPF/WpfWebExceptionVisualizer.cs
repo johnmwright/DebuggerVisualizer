@@ -35,10 +35,8 @@ namespace VisualizerExamples.DebuggerVisualizer.WebException.WPF
             // set the attributes of WPF window
             var win = new Window
             {
-                Title = "WPF Web Exception Visualizer",
-                MinWidth = 500,
-                MinHeight = 500,
-                Width = 700,
+                Title = "WPF Web Exception Visualizer",              
+                Width = 900,
                 Height = 700,
                 Padding = new Thickness(5),
                 Margin = new Thickness(5),

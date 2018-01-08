@@ -8,7 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="700"             
              MinWidth="500" MinHeight="500" 
-             Width="700" Height="700"
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
              d:DataContext="{d:DesignInstance Type=viewModels:WebExceptionViewModel, IsDesignTimeCreatable=False}">
     <Grid>
@@ -17,10 +16,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
@@ -33,24 +31,12 @@
                 <TextBlock TextWrapping="Wrap" Text="{Binding Path=Status, Mode=OneWay}"></TextBlock>
             </StackPanel>-->
 
-        <Label  Grid.Row="1" Margin="5" Padding="0" FontWeight="Bold">Stack Trace:</Label>
-        <ScrollViewer  Grid.Row="2" Margin="15 0 0 0"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
-            <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=StackTrace, Mode=OneWay}"></TextBlock>
+        <wpf:WebResponseVisualizerControl DataContext="{Binding Path=Response, Mode=OneWay}" Grid.Row="1" />
+
+        <Label  Grid.Row="2" Margin="5" Padding="0" FontWeight="Bold">Stack Trace:</Label>
+        <ScrollViewer  Grid.Row="3" Margin="5 0 0 5"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
+            <WebBrowser Name="stacktraceBrowser" LoadCompleted="StacktraceBrowser_OnLoadCompleted" />
         </ScrollViewer>
-        
-        <!--<StackPanel Orientation="Horizontal" Margin="5">
-                <Label Margin="0 0 5 0" Padding="0">Has Response:</Label>
-                <CheckBox  IsChecked="{Binding Path=HasResponse, Mode=OneWay}" />
-            </StackPanel>-->
-        
-        
-            <wpf:WebResponseVisualizerControl DataContext="{Binding Path=Response, Mode=OneWay}" Grid.Row="3" />
-        
-            <!--<Label Margin="0 0 5 0" Padding="0 5" FontWeight="Bold" Grid.Row="3">Raw Response:</Label>
-            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" Grid.Row="4">
-                <TextBlock TextWrapping="NoWrap" Text="{Binding Path=Response.RawResponse, Mode=OneWay}" Width="Auto"></TextBlock>
-            </ScrollViewer>-->
-        
 
     </Grid>
 </UserControl>

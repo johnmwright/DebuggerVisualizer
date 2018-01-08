@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels1="clr-namespace:VisualizerExamples.DebuggerVisualizer.ViewModels"
+             xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500"             
-             Height="700" MinWidth="700"
+             d:DesignHeight="300" d:DesignWidth="500"                       
              d:DataContext="{d:DesignInstance Type=viewModels1:ResponseViewModel, IsDesignTimeCreatable=False}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -17,21 +17,23 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
-        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
-            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Status Code:</Label>
-            <TextBlock TextWrapping="Wrap"   Text="{Binding Path=StatusCodeDesc, Mode=OneWay}"></TextBlock>
-            <TextBlock TextWrapping="Wrap"   Text="{Binding Path=StatusCode, Mode=OneWay}"></TextBlock>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="5"  Grid.Row="1">
-            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Response URI:</Label>
+        <StackPanel Orientation="Horizontal" Margin="5"  Grid.Row="0">
+            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">URI:</Label>
             <TextBlock TextWrapping="Wrap"   Text="{Binding Path=Method, Mode=OneWay}"></TextBlock>
             <TextBlock TextWrapping="Wrap" Margin="5 0 0 0"   Text="{Binding Path=ResponseUri, Mode=OneWay}"></TextBlock>
         </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="1">
+            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Status Code:</Label>
+            <TextBlock TextWrapping="Wrap" Margin="2 0"  Text="{Binding Path=StatusCode, Mode=OneWay}"/>
+            <TextBlock> - (</TextBlock>
+            <TextBlock TextWrapping="Wrap"  Margin="2 0"  Text="{Binding Path=StatusCodeDesc, Mode=OneWay}"/>
+            <TextBlock>)</TextBlock>
+        </StackPanel>
+       
         <StackPanel Orientation="Horizontal" Margin="5"  Grid.Row="2">
             <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Content Type:</Label>
             <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ContentType, Mode=OneWay}"></TextBlock>
@@ -39,18 +41,23 @@
             <TextBlock TextWrapping="Wrap"   Text="{Binding Path=ContentLength, Mode=OneWay}"></TextBlock>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="5 0 0 5" >
-            <Label Padding="0" FontWeight="Bold">Response:</Label>
-            <Button Name="btnResponseRaw" ToolTip="Raw Text" Margin="5 0 0 0" Width="15" IsDefault="False" IsCancel="False" IsEnabled="False" Click="BtnResponseRaw_OnClick" ><Image Source="raw.png" /></Button>
-            <Button Name="btnResponseWeb" ToolTip="HTML Rendered" Margin="5 0 0 0" Width="15" IsDefault="False" IsCancel="False" IsEnabled="True" Click="BtnResponseWeb_OnClick"><Image Source="browser2.png" /></Button>
-        </StackPanel>
         
-        <ScrollViewer Margin="15 0 0 0" MinWidth="400px" MaxHeight="200px" Grid.Row="4" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
-            <TextBlock Name="txtResponse" Visibility="Visible" Width="Auto" TextWrapping="Wrap" Text="{Binding Path=RawResponse, Mode=OneTime}" />
-        </ScrollViewer>
-        <WebBrowser Name="webResposne" Visibility="Collapsed"  MinWidth="400px" Width="auto" MaxHeight="200px" Margin="15 0 0 0"  Grid.Row="4" />
-        <!--wpfValueConverters:BrowserBehavior.Html="{Binding Path=RawResponse}"-->
-
+        <Label Padding="0" FontWeight="Bold" Grid.Row="3" Margin="5 0 0 5">Response:</Label>
+        
+        <TabControl Grid.Row="4" SelectionChanged="Selector_OnSelectionChanged">
+            <TabItem Header="Raw Text" Name="tabText">
+                <ScrollViewer Margin="15 0 0 0" MinWidth="400px"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
+                    <!--<TextBlock Name="txtResponse" Visibility="Visible" Width="Auto" TextWrapping="Wrap" Text="{Binding Path=RawResponse, Mode=OneTime}" />-->
+                    <avalonEdit:TextEditor  Name="txtResponse"  Width="Auto" FontFamily="Consolas"  FontSize="10pt"  />
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Rendered" Name="tabBrowser" >
+                <WebBrowser Name="webResposne"   MinWidth="400px" Width="auto"  Margin="15 0 0 0"  Grid.Row="4" />
+                <!--wpfValueConverters:BrowserBehavior.Html="{Binding Path=RawResponse}"-->
+            </TabItem>
+        </TabControl>
+       
+        
         <!--<StackPanel Orientation="Horizontal" Margin="5">
                 <Label Margin="0 0 5 0" Padding="0">Response:</Label>
                 <WebBrowser wpfValueConverters:BrowserBehavior.Html="{Binding Path=RawResponse}" MinWidth="400px" Width="auto" MaxHeight="200" />

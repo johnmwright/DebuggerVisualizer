@@ -1,0 +1,244 @@
+﻿
+/*
+FROM OPSERVER: https://github.com/opserver/Opserver/blob/master/Opserver/Content/themes/_shared/exceptions.less
+*/
+
+
+
+.badge-link-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 8px;
+    overflow: auto;
+}
+
+.badge-link-list li {
+    float: left;
+    margin-bottom: 2px;
+}
+
+.badge-link-list li.active a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.badge-link-list li a:hover .badge {
+    text-decoration: none;
+}
+
+.badge-link-list li .badge {
+    font-size: 10px;
+    vertical-align: text-bottom;
+    text-decoration: none;
+    line-height: 15px;
+    padding: 0 4px;
+}
+
+.badge-link-list li:after {
+    content: " | ";
+    color: #eeeeee;
+}
+
+.badge-link-list li:last-child:after {
+    content: "";
+    display: inline-block;
+}
+
+.page-header + .badge-link-list {
+    margin-top: 0;
+}
+
+.table-exceptions > tbody > tr td:nth-child(1),
+.table-exceptions > tbody > tr td:nth-child(2),
+.table-exceptions > tbody > tr td:nth-child(6),
+.table-exceptions > tbody > tr td:nth-child(7),
+.table-exceptions > tbody > tr td:nth-child(8),
+.table-exceptions > tbody > tr td:nth-child(9) {
+    white-space: nowrap;
+}
+
+.table-exceptions > tbody > tr td:nth-child(3) {
+    color: #6f6f6f;
+}
+
+.table-exceptions > tbody > tr td:nth-child(3) a {
+    color: #6f6f6f;
+}
+
+.error-detail {
+    background-color: #ffffcc;
+}
+
+.error-preview-popup {
+    position: absolute;
+    background: #fff;
+    width: calc(90%);
+    left: 52px;
+    margin-top: -19px;
+    padding: 10px;
+    z-index: 2;
+    font-size: 15px;
+    box-shadow: 3px 3px 10px #555555;
+}
+
+.error-preview-popup .text-danger {
+    overflow: hidden;
+}
+
+.error-preview-popup .title-prefix {
+    color: #6f6f6f;
+}
+
+.error-preview-popup h6 {
+    margin-top: 0;
+}
+
+.error-preview-popup .error-detail {
+    font-size: 12px;
+    max-height: 100px;
+}
+
+.error-preview-popup p:last-child {
+    margin-bottom: 0;
+}
+
+.error-info pre {
+    padding: 0.5em;
+    overflow: auto;
+    line-height: 1.1;
+}
+
+.error-info pre code {
+    /*font-size: 0.8em;*/
+    white-space: pre;
+}
+
+.error-info pre.stack-row {
+    white-space: nowrap;
+}
+
+.error-info pre.stack {
+    /*background-color: #fefbec;*/
+    /*border: solid 1px #f5f5f5;*/
+}
+
+.error-info pre.stack.table code {
+    display: table;
+}
+
+.error-info pre.stack.table .stack.stack-row {
+    display: table-row;
+}
+
+.error-info pre.stack.table .stack.leadIn,
+.error-info pre.stack.table .stack.type,
+.error-info pre.stack.table .stack.method-section,
+.error-info pre.stack.table .stack.source-section {
+    display: table-cell;
+}
+
+.error-info pre.stack.table .stack.misc {
+    display: none;
+}
+
+.error-info pre.stack.table .stack.method-section .misc {
+    display: normal;
+}
+
+.error-info pre.command {
+    background-color: #eee;
+    padding: 0;
+    margin-top: 0;
+}
+
+.error-info .stack.async {
+    opacity: 0.6;
+    display: none;
+}
+
+.error-info .stack.leadin,
+.error-info .stack.file,
+.error-info .stack.line-prefix,
+.error-info .stack.path,
+.error-info .stack.dot {
+    color: #bbb;
+}
+
+.error-info .stack.async-tag {
+    color: #d14;
+    font-weight: bold;
+}
+
+.error-info .stack.async-tag:before {
+    content: "(";
+}
+
+.error-info .stack.async-tag:after {
+    content: ")";
+}
+
+.error-info .stack.type {
+    color: #006696;
+}
+
+.error-info .stack.misc,
+.error-info .stack.parens,
+.error-info .stack.generic-type {
+    color: #444;
+}
+
+.error-info .stack.method {
+    color: #1fad83;
+}
+
+.error-info .stack.paramType {
+    color: #147FCC;
+}
+
+.error-info .stack.paramName {
+    color: #885D3B;
+}
+
+.error-info pre.stack.dark {
+    /*background-color: #2f3640;*/
+    border: solid 1px #f5f5f5;
+}
+
+.error-info pre.stack.dark a {
+    color: #bfe0ea;
+    text-decoration: underline;
+}
+
+.error-info pre.stack.dark .stack.leadin,
+.error-info pre.stack.dark .stack.path,
+.error-info pre.stack.dark .stack.line-prefix,
+.error-info pre.stack.dark .stack.dot {
+    color: #bbb;
+}
+
+.error-info pre.stack.dark .stack.async-tag {
+    color: #d14;
+}
+
+.error-info pre.stack.dark .stack.type {
+    color: #8e9caf;
+}
+
+.error-info pre.stack.dark .stack.misc,
+.error-info pre.stack.dark .stack.parens,
+.error-info pre.stack.dark .stack.line,
+.error-info pre.stack.dark .stack.generic-type {
+    color: #e6e9ed;
+}
+
+.error-info pre.stack.dark .stack.method {
+    color: #4fc1e9;
+}
+
+.error-info pre.stack.dark .stack.paramType {
+    color: #e6e9ed;
+}
+
+.error-info pre.stack.dark .stack.paramName {
+    color: #ed5565;
+}
