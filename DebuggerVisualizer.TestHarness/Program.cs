@@ -5,6 +5,7 @@ using System.Net;
 using SimpleExample;
 using SimpleExample.DebuggerVisualizer;
 using SimpleExample.DebuggerVisualizer.ReadOnlyWithViewModel;
+using NetStandard = SimpleExample.NetStandard;
 using ReadOnly =SimpleExample.DebuggerVisualizer.ReadOnly;
 using ReadWrite = SimpleExample.DebuggerVisualizer.ReadWrite;
 using VisualizerExamples.DebuggerVisualizer.Exception;
@@ -24,7 +25,9 @@ namespace DebuggerVisualizer.TestHarness
             Web();
 
             TestShowObjectVisualizer(new SomeType() { Foo = "Foo bar" });
-            
+
+            TestShowObjectVisualizerWithObjectSource(new SomeType() {Foo = "Foo bar"});
+
             TestShowEditableObjectVisualizer(new SomeType() { Foo = "Foo bar" });
 
             TestShowExceptionVisualizer(new WebException("this broke"));
@@ -32,6 +35,10 @@ namespace DebuggerVisualizer.TestHarness
             TestShowWpfExceptionVisualizer(new WebException("this broke"));
 
             SomeTypeVisualizerWriteBackTest(new SomeType() {Foo = "Foo bar"});
+
+            TestShowNetStandardObjectVisualizer(new NetStandard.SomeType() {Foo = "Foo bar"});
+
+            TestShowNetStandardNonSerializableObjectVisualizer(new NetStandard.SomeNonSerializableType { Foo = "Foo bar" });
         }
 
         private static void SomeTypeVisualizerWriteBackTest(SomeType someType)
@@ -105,6 +112,24 @@ namespace DebuggerVisualizer.TestHarness
             visualizerHost.ShowVisualizer();
         }
 
+        public static void TestShowNetStandardObjectVisualizer(object objectToVisualize)
+        {
+            Debugger.Break();
+            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize,
+                visualizer: typeof(NetStandard.DebuggerVisualizer.ReadOnly.SomeTypeVisualizer));
+            visualizerHost.ShowVisualizer();
+        }
+
+
+        public static void TestShowNetStandardNonSerializableObjectVisualizer(object objectToVisualize)
+        {
+            Debugger.Break();
+            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize,
+                visualizer: typeof(NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel.SomeNonSerializableTypeVisualizer),
+                visualizerObjectSource: typeof(NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel.SomeNonSerializableTypeVisualObjectSource));
+            visualizerHost.ShowVisualizer();
+        }
+
         public static void TestShowExceptionVisualizer(object objectToVisualize)
         {
             VisualizerDevelopmentHost visualizerHost = new VisualizerDevelopmentHost(objectToVisualize, typeof(SimpleExceptionVisualizer));
@@ -119,6 +144,7 @@ namespace DebuggerVisualizer.TestHarness
                 typeof(WebExceptionVisualObjectSource));
             visualizerHost.ShowVisualizer();
         }
+        
     }
 }
 

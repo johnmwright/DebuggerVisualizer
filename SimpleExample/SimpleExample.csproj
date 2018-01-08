@@ -55,6 +55,13 @@
     <Compile Include="DebuggerVisualizer.ReadOnly.WPF\SomeTypeVisualizerControl.xaml.cs">
       <DependentUpon>SomeTypeVisualizerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel\SomeNonSerializableTypeVisualizer.cs" />
+    <Compile Include="NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel\SomeNonSerializableTypeVisualizerWithViewModelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel\SomeNonSerializableTypeVisualizerWithViewModelForm.Designer.cs">
+      <DependentUpon>SomeNonSerializableTypeVisualizerWithViewModelForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebuggerVisualizer.ReadOnlyWithViewModel\SomeNonSerializableTypeVisualizer.cs" />
     <Compile Include="DebuggerVisualizer.ReadOnlyWithViewModel\SomeTypeViewModel.cs" />
     <Compile Include="DebuggerVisualizer.ReadOnlyWithViewModel\SomeNonSerializableTypeVisualizerWithViewModelForm.cs">
@@ -79,11 +86,21 @@
     <Compile Include="DebuggerVisualizer.ReadOnly\SomeTypeVisualizerForm.Designer.cs">
       <DependentUpon>SomeTypeVisualizerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NetStandard.DebuggerVisualizer.ReadOnly\SomeTypeVisualizer.cs" />
+    <Compile Include="NetStandard.DebuggerVisualizer.ReadOnly\SomeTypeVisualizerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NetStandard.DebuggerVisualizer.ReadOnly\SomeTypeVisualizerForm.Designer.cs">
+      <DependentUpon>SomeTypeVisualizerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SomeNonSerializableType.cs" />
     <Compile Include="SomeType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel\SomeNonSerializableTypeVisualizerWithViewModelForm.resx">
+      <DependentUpon>SomeNonSerializableTypeVisualizerWithViewModelForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DebuggerVisualizer.ReadOnlyWithViewModel\SomeNonSerializableTypeVisualizerWithViewModelForm.resx">
       <DependentUpon>SomeNonSerializableTypeVisualizerWithViewModelForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,12 +110,21 @@
     <EmbeddedResource Include="DebuggerVisualizer.ReadOnly\SomeTypeVisualizerForm.resx">
       <DependentUpon>SomeTypeVisualizerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NetStandard.DebuggerVisualizer.ReadOnly\SomeTypeVisualizerForm.resx">
+      <DependentUpon>SomeTypeVisualizerForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Page Include="DebuggerVisualizer.ReadOnly.WPF\SomeTypeVisualizerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleExample.NetStandard\SimpleExample.NetStandard.csproj">
+      <Project>{da65554d-2535-484b-9198-eca530b71bb6}</Project>
+      <Name>SimpleExample.NetStandard</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

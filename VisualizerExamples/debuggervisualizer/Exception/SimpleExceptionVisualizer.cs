@@ -35,7 +35,7 @@ namespace VisualizerExamples.DebuggerVisualizer.Exception
                 }
                 else
                 {
-                    displayForm.txtMessage.Text = objectProvider.GetType().FullName; //data.Message;
+                    displayForm.txtMessage.Text = data.Message; 
                     displayForm.txtStackTrace.Text = data.StackTrace;
                 }
 

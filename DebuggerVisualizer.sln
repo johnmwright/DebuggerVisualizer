@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebuggerVisualizer.TestHarness", "DebuggerVisualizer.TestHarness\DebuggerVisualizer.TestHarness.csproj", "{DC958167-6E60-4DD9-BEA5-A98208A812DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualizerExamples", "VisualizerExamples\VisualizerExamples.csproj", "{4AE7DE76-697D-4D7F-9BCD-78AAD1844BAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleExample", "SimpleExample\SimpleExample.csproj", "{3D775E5C-FFC8-4A40-80AF-7EF55D5D59F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net-standard", "net-standard", "{E2321920-CFDD-4D9A-83F2-D30DCC566E13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppTestHarness", "ConsoleAppTester\ConsoleAppTestHarness.csproj", "{3FCD73A5-7E09-432D-8D14-52CF6316105F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleExample.NetStandard", "SimpleExample.NetStandard\SimpleExample.NetStandard.csproj", "{DA65554D-2535-484B-9198-ECA530B71BB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,9 +33,21 @@ Global
 		{3D775E5C-FFC8-4A40-80AF-7EF55D5D59F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D775E5C-FFC8-4A40-80AF-7EF55D5D59F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D775E5C-FFC8-4A40-80AF-7EF55D5D59F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FCD73A5-7E09-432D-8D14-52CF6316105F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FCD73A5-7E09-432D-8D14-52CF6316105F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FCD73A5-7E09-432D-8D14-52CF6316105F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FCD73A5-7E09-432D-8D14-52CF6316105F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA65554D-2535-484B-9198-ECA530B71BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA65554D-2535-484B-9198-ECA530B71BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA65554D-2535-484B-9198-ECA530B71BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA65554D-2535-484B-9198-ECA530B71BB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3FCD73A5-7E09-432D-8D14-52CF6316105F} = {E2321920-CFDD-4D9A-83F2-D30DCC566E13}
+		{DA65554D-2535-484B-9198-ECA530B71BB6} = {E2321920-CFDD-4D9A-83F2-D30DCC566E13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E58467D-91E7-4BB8-87AE-C6F4270094E6}

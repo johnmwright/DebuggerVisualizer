@@ -55,6 +55,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SimpleExample.NetStandard\SimpleExample.NetStandard.csproj">
+      <Project>{da65554d-2535-484b-9198-eca530b71bb6}</Project>
+      <Name>SimpleExample.NetStandard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SimpleExample\SimpleExample.csproj">
       <Project>{3d775e5c-ffc8-4a40-80af-7ef55d5d59f5}</Project>
       <Name>SimpleExample</Name>
