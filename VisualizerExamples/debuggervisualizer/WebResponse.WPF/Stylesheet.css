@@ -142,6 +142,7 @@ FROM OPSERVER: https://github.com/opserver/Opserver/blob/master/Opserver/Content
 }
 
 .error-info pre.stack.table .stack.method-section .misc {
+    /* ReSharper disable once InvalidValue */
     display: normal;
 }
 

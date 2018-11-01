@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="VisualizerExamples.DebuggerVisualizer.Exception.WPF.ExceptionVisualizerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:VisualizerExamples.DebuggerVisualizer.ViewModels"
+             xmlns:wpf="clr-namespace:VisualizerExamples.DebuggerVisualizer.WebResponse.WPF"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="700"             
+             MinWidth="500" MinHeight="500" 
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             d:DataContext="{d:DesignInstance Type=viewModels:ExceptionViewModel, IsDesignTimeCreatable=False}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="500"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+            <Label Margin="0 0 5 0" Padding="0" FontWeight="Bold">Message:</Label>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Message, Mode=OneWay}" Height="auto" />
+        </StackPanel>
+     
+        <Label  Grid.Row="2" Margin="5" Padding="0" FontWeight="Bold">Stack Trace:</Label>
+        <ScrollViewer  Grid.Row="3" Margin="5 0 0 5"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" BorderBrush="Black">
+            <WebBrowser Name="stacktraceBrowser" LoadCompleted="StacktraceBrowser_OnLoadCompleted" />
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>
+

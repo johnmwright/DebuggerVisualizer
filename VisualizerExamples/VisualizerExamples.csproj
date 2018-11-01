@@ -73,6 +73,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DebuggerVisualizer\Exception.WPF\ExceptionVisualizerControl.xaml.cs">
+      <DependentUpon>ExceptionVisualizerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DebuggerVisualizer\Exception.WPF\ExceptionVisualObjectSource.cs" />
+    <Compile Include="DebuggerVisualizer\Exception.WPF\WpfExceptionVisualizer.cs" />
+    <Compile Include="DebuggerVisualizer\ViewModels\ExceptionViewModel.cs" />
     <Compile Include="DebuggerVisualizer\WebException.Simple\SimpleWebExceptionVisualizer.cs" />
     <Compile Include="DebuggerVisualizer\WebException.Simple\SimpleWebExceptionWinForm.cs">
       <SubType>Form</SubType>
@@ -110,6 +116,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DebuggerVisualizer\Exception.WPF\ExceptionVisualizerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="DebuggerVisualizer\WebException.WPF\WebExceptionVisualizerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,5 +143,6 @@
   <ItemGroup>
     <EmbeddedResource Include="DebuggerVisualizer\WebResponse.WPF\Stylesheet.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
