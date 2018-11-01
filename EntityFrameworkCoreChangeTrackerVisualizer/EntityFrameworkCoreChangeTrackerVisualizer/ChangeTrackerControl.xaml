@@ -1,0 +1,254 @@
+﻿<UserControl x:Class="EntityFrameworkCoreChangeTrackerVisualizer.ChangeTrackerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EntityFrameworkCoreChangeTrackerVisualizer"
+             xmlns:entityFrameworkCoreChangeTrackerVisualizerObjectSource="clr-namespace:EntityFrameworkCoreChangeTrackerVisualizerObjectSource;assembly=EntityFrameworkCoreChangeTrackerVisualizerObjectSource"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="900"           
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+             d:DataContext="{d:DesignInstance Type=entityFrameworkCoreChangeTrackerVisualizerObjectSource:ChangeTrackerViewModel, IsDesignTimeCreatable=False}"
+             >
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="entities" Source="{Binding Path=Entries, Mode=OneWay}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="State"></PropertyGroupDescription>
+                <PropertyGroupDescription PropertyName="EntityType"></PropertyGroupDescription>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel  Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label FontWeight="Bold">Context:</Label>
+            <TextBlock VerticalAlignment="Center" Text="{Binding Path=ContextName, Mode=OneWay}"></TextBlock>
+            
+            <Label FontWeight="Bold" Margin="15 0 0 0">AutoDetectChangesEnabled:</Label>
+            <TextBlock VerticalAlignment="Center" Text="{Binding Path=AutoDetectChangesEnabled, Mode=OneWay}"></TextBlock>
+         
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False" HeadersVisibility="None"
+                  ItemsSource="{Binding Source={StaticResource entities}}" >
+            <DataGrid.GroupStyle>
+                <!-- Style for groups at top level. -->
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Margin" Value="0,0,0,5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander IsExpanded="True" Background="#FF112255" BorderBrush="#FF002255" Foreground="#FFEEEEEE" BorderThickness="1,1,1,5">
+                                            <Expander.Header>
+                                                <DockPanel>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,0,0" Width="100"/>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount}"/>
+                                                </DockPanel>
+                                            </Expander.Header>
+                                            <Expander.Content>
+                                                <ItemsPresenter />
+                                            </Expander.Content>
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+                <!-- Style for groups under the top level. -->
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Margin" Value="0,0,0,5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander IsExpanded="True" Background="LightBlue" Margin="25 0 0 0">
+                                            <Expander.Header>
+                                                <DockPanel Background="LightBlue">
+                                                    <TextBlock Text="{Binding Path=Name}" Foreground="Blue" Margin="30,0,0,0" Width="100"/>
+                                                    <TextBlock Text="{Binding Path=ItemCount}" Foreground="Blue"/>
+                                                </DockPanel>
+                                            </Expander.Header>
+                                            <Expander.Content>
+                                                <ItemsPresenter />
+                                            </Expander.Content>
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+               
+            </DataGrid.GroupStyle>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Background" Value="White" />
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding StrigifiedEntity, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="IsKeySet" Binding="{Binding IsKeySet, Mode=OneWay}"></DataGridCheckBoxColumn>
+               
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontWeight="Bold">Modified Members: </Label>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding ModifiedMembersDescription, Mode=OneWay}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+               
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontWeight="Bold">Modified Navigations:</Label>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding ModifiedNavigationsDescription, Mode=OneWay}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontWeight="Bold">Modified References:</Label>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding ModifiedReferencesDescription, Mode=OneWay}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn Binding="{Binding ModifiedMembersDescription, Mode=OneWay}"></DataGridTextColumn>-->
+                <!--<DataGridTextColumn Header="Modified Navigations" Binding="{Binding ModifiedNavigationsDescription, Mode=OneWay}"></DataGridTextColumn>-->
+                <!--<DataGridTextColumn Header="Modified References" Binding="{Binding ModifiedReferencesDescription, Mode=OneWay}"></DataGridTextColumn>-->
+                
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10 5 5 10">
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" CanHorizontallyScroll="True">
+                            <Label  FontWeight="Bold">Members:</Label>
+
+                            <DataGrid  IsReadOnly="True" AutoGenerateColumns="False"
+                                      ItemsSource="{Binding Members}" CanUserResizeRows="True">
+
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                        <Setter Property="LayoutTransform">
+                                            <Setter.Value>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="-90"/>
+                                                    <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                                </TransformGroup>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="HorizontalContentAlignment" Value="Right" />
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+
+                                <DataGrid.LayoutTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="90"/>
+                                        <MatrixTransform Matrix="-1,0,0,1,0,0"/>
+                                    </TransformGroup>
+                                </DataGrid.LayoutTransform>
+
+                                <DataGrid.CellStyle>
+                                    <Style  TargetType="DataGridCell">
+                                        <Setter Property="LayoutTransform">
+                                            <Setter.Value>
+                                                <TransformGroup>
+                                                    <RotateTransform Angle="-90"/>
+                                                    <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                                </TransformGroup>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGrid.CellStyle>
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Member Name:" Binding="{Binding MetaName, Mode=OneWay}"></DataGridTextColumn>
+                                    <DataGridCheckBoxColumn Header="Is Modified:" Binding="{Binding IsModified, Mode=OneWay}"></DataGridCheckBoxColumn>
+                                    <DataGridTextColumn Header="Current Value:" Binding="{Binding CurrentValue, Mode=OneWay}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <!--<RowDefinition Height="Auto"/>-->
+                                </Grid.RowDefinitions>
+
+
+                                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                                    <Label FontWeight="Bold">Navigations:</Label>
+
+                                    <DataGrid  IsReadOnly="True" AutoGenerateColumns="False" 
+                                           ItemsSource="{Binding Navigations}" >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Name" Binding="{Binding MetaName, Mode=OneWay}"></DataGridTextColumn>
+                                            <DataGridCheckBoxColumn Header="Is Modified" Binding="{Binding IsModified, Mode=OneWay}"></DataGridCheckBoxColumn>
+                                            <DataGridCheckBoxColumn Header="Is Loaded" Binding="{Binding IsLoaded, Mode=OneWay}"></DataGridCheckBoxColumn>
+                                            <DataGridTextColumn Header="Current Value" Binding="{Binding CurrentValue, Mode=OneWay}"></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+
+                                </StackPanel>
+
+
+                                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="2">
+                                    <Label FontWeight="Bold">References:</Label>
+                                    <DataGrid  IsReadOnly="True" AutoGenerateColumns="False"
+                                           ItemsSource="{Binding References}" >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Meta Name" Binding="{Binding MetaName, Mode=OneWay}"></DataGridTextColumn>
+                                            <DataGridCheckBoxColumn Header="Is Modified" Binding="{Binding IsModified, Mode=OneWay}"></DataGridCheckBoxColumn>
+                                            <DataGridCheckBoxColumn Header="Is Loaded" Binding="{Binding IsLoaded, Mode=OneWay}"></DataGridCheckBoxColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+
+                                </StackPanel>
+
+                            </Grid>
+                        </StackPanel>
+
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="2">
+            <ScrollViewer>
+                <TextBlock Margin="5" TextWrapping="Wrap" Text="{Binding Path=DebugDump, Mode=OneWay}" Height="auto" />
+             </ScrollViewer>
+        </StackPanel>-->
+
+    </Grid>
+</UserControl>
