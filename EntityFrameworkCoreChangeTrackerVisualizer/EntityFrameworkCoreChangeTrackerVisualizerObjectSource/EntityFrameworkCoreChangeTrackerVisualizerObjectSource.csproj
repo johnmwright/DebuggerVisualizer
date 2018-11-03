@@ -4,6 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\output</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\output</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="EntityFrameworkCoreChangeTrackerVisualizer\**" />
     <EmbeddedResource Remove="EntityFrameworkCoreChangeTrackerVisualizer\**" />
@@ -11,12 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.VisualStudio.DebuggerVisualizers.dll</HintPath>
+      <Private>false</Private>
+      <SpecificVersion>false</SpecificVersion>
     </Reference>
   </ItemGroup>
 
