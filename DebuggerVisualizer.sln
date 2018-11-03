@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebuggerVisualizer.TestHarness", "DebuggerVisualizer.TestHarness\DebuggerVisualizer.TestHarness.csproj", "{DC958167-6E60-4DD9-BEA5-A98208A812DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualizerExamples", "VisualizerExamples\VisualizerExamples.csproj", "{4AE7DE76-697D-4D7F-9BCD-78AAD1844BAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionVisualizer", "VisualizerExamples\ExceptionVisualizer.csproj", "{4AE7DE76-697D-4D7F-9BCD-78AAD1844BAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleExample", "SimpleExample\SimpleExample.csproj", "{3D775E5C-FFC8-4A40-80AF-7EF55D5D59F5}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityFrameworkCoreChangeTrackerVisualizer", "EntityFrameworkCoreChangeTrackerVisualizer\EntityFrameworkCoreChangeTrackerVisualizer\EntityFrameworkCoreChangeTrackerVisualizer.csproj", "{76F60740-F576-4F50-AEFD-15325C3FB276}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkCoreChangeTrackerVisualizerObjectSource", "EntityFrameworkCoreChangeTrackerVisualizer\EntityFrameworkCoreChangeTrackerVisualizerObjectSource\EntityFrameworkCoreChangeTrackerVisualizerObjectSource.csproj", "{E015C2B0-5849-4140-936D-03FB83A3D5FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Real-World Examples", "Real-World Examples", "{66981353-3313-4D14-A860-D7A6339FEE08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Simpled Examples", "Simpled Examples", "{6FEFC058-D28C-4994-B6A6-9F0D0401CACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,8 +64,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{DC958167-6E60-4DD9-BEA5-A98208A812DE} = {6FEFC058-D28C-4994-B6A6-9F0D0401CACF}
+		{4AE7DE76-697D-4D7F-9BCD-78AAD1844BAC} = {66981353-3313-4D14-A860-D7A6339FEE08}
+		{3D775E5C-FFC8-4A40-80AF-7EF55D5D59F5} = {6FEFC058-D28C-4994-B6A6-9F0D0401CACF}
+		{E2321920-CFDD-4D9A-83F2-D30DCC566E13} = {6FEFC058-D28C-4994-B6A6-9F0D0401CACF}
 		{3FCD73A5-7E09-432D-8D14-52CF6316105F} = {E2321920-CFDD-4D9A-83F2-D30DCC566E13}
 		{DA65554D-2535-484B-9198-ECA530B71BB6} = {E2321920-CFDD-4D9A-83F2-D30DCC566E13}
+		{80E9B7A2-FDBC-4A82-B610-040ADDFA641E} = {66981353-3313-4D14-A860-D7A6339FEE08}
 		{76F60740-F576-4F50-AEFD-15325C3FB276} = {80E9B7A2-FDBC-4A82-B610-040ADDFA641E}
 		{E015C2B0-5849-4140-936D-03FB83A3D5FE} = {80E9B7A2-FDBC-4A82-B610-040ADDFA641E}
 	EndGlobalSection

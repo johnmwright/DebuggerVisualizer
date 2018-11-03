@@ -63,9 +63,9 @@
       <Project>{3d775e5c-ffc8-4a40-80af-7ef55d5d59f5}</Project>
       <Name>SimpleExample</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VisualizerExamples\VisualizerExamples.csproj">
+    <ProjectReference Include="..\VisualizerExamples\ExceptionVisualizer.csproj">
       <Project>{4ae7de76-697d-4d7f-9bcd-78aad1844bac}</Project>
-      <Name>VisualizerExamples</Name>
+      <Name>ExceptionVisualizer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
