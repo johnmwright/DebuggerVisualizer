@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using EntityFrameworkCoreChangeTrackerVisualizerObjectSource;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.VisualStudio.DebuggerVisualizers;
 
@@ -13,6 +14,13 @@ using Microsoft.VisualStudio.DebuggerVisualizers;
 [assembly: DebuggerVisualizer(typeof(EntityFrameworkCoreChangeTrackerVisualizer.EntityFrameworkCoreChangeTrackerVisualizer),
     visualizerObjectSource: typeof(ChangeTrackerVisualObjectSource), 
     Target = typeof(ChangeTracker),
+    Description = "EntityFramework ChangeTracker Visualizer")]
+
+
+
+[assembly: DebuggerVisualizer(typeof(EntityFrameworkCoreChangeTrackerVisualizer.EntityFrameworkCoreChangeTrackerVisualizer),
+    visualizerObjectSource: typeof(DbContextChangeTrackerVisualObjectSource),
+    Target = typeof(DbContext),
     Description = "EntityFramework ChangeTracker Visualizer")]
 
 //inspired from https://twitter.com/nick_craver/status/1039222872114384897?s=21
@@ -37,13 +45,11 @@ namespace EntityFrameworkCoreChangeTrackerVisualizer
             var win = new Window
             {
                 Title = $"EntityFramework ChangeTracker Visualizer",
-                Width = 1000,
-                Height = 800,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Content = vizControl,
-                ResizeMode = ResizeMode.CanResize,
+                ResizeMode = ResizeMode.CanResizeWithGrip,
                 Topmost = true,
-                SizeToContent = SizeToContent.Width,
+                SizeToContent = SizeToContent.WidthAndHeight,
                 ShowInTaskbar = true
             };
             

@@ -18,4 +18,18 @@ namespace EntityFrameworkCoreChangeTrackerVisualizerObjectSource
             base.GetData(viewModel, outgoingData);
         }
     }
+
+    public class DbContextChangeTrackerVisualObjectSource : VisualizerObjectSource
+    {
+        public override void GetData(object target, Stream outgoingData)
+        {
+            // `target` is the object being visualized.
+            // Convert it to the ViewModel
+            var originalObj = (DbContext)target;
+            var viewModel = new ChangeTrackerViewModel(originalObj.ChangeTracker);
+
+            // Send the ViewModel to the Visualizer via the outgoingData stream.
+            base.GetData(viewModel, outgoingData);
+        }
+    }
 }
