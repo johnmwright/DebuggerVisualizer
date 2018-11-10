@@ -21,7 +21,6 @@ namespace DebuggerVisualizer.TestHarness
         [STAThread]
         static void Main(string[] args)
         {
-            Debugger.Launch();
 
             Web();
 
