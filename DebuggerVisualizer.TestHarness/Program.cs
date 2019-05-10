@@ -21,6 +21,7 @@ namespace DebuggerVisualizer.TestHarness
         [STAThread]
         static void Main(string[] args)
         {
+            Debugger.Launch();
 
             Web();
 
@@ -82,7 +83,7 @@ namespace DebuggerVisualizer.TestHarness
         
         public static void TestShowObjectVisualizer(object objectToVisualize)
         {
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize, 
+            var visualizerHost = new VisualizerDevelopmentHost(targetObject: objectToVisualize, 
                                                                visualizer: typeof(ReadOnly.SomeTypeVisualizer));
             visualizerHost.ShowVisualizer();
         }
@@ -90,9 +91,9 @@ namespace DebuggerVisualizer.TestHarness
 
         public static void TestShowObjectVisualizerWithObjectSource(object objectToVisualize)
         {
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize,
+            var visualizerHost = new VisualizerDevelopmentHost(targetObject: objectToVisualize,
                                                                visualizer: typeof(SomeNonSerializableTypeVisualizer),
-                                                               visualizerObjectSource: typeof(SomeNonSerializableTypeVisualObjectSource));
+                                                               visualizerObjectSourceType: typeof(SomeNonSerializableTypeVisualObjectSource));
             visualizerHost.ShowVisualizer();
         }
 
@@ -100,17 +101,17 @@ namespace DebuggerVisualizer.TestHarness
 
         public static void TestShowEditableObjectVisualizer(object objectToVisualize)
         {
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize, 
-                                                               visualizer: typeof(ReadWrite.SomeTypeVisualizer), 
-                                                               visualizerObjectSource: typeof(ReadWrite.SomeTypeVisualizerObjectSource),
-                                                               replacementOK: true);
+            var visualizerHost = new VisualizerDevelopmentHost(targetObject: objectToVisualize, 
+                                                               visualizer: typeof(ReadWrite.SomeTypeVisualizer),
+                                                               visualizerObjectSourceType: typeof(ReadWrite.SomeTypeVisualizerObjectSource),
+                                                               isObjectReplaceable: true);
             visualizerHost.ShowVisualizer();
         }
 
         public static void TestShowNetStandardObjectVisualizer(object objectToVisualize)
         {
             Debugger.Break();
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize,
+            var visualizerHost = new VisualizerDevelopmentHost(targetObject: objectToVisualize,
                 visualizer: typeof(NetStandard.DebuggerVisualizer.ReadOnly.SomeTypeVisualizer));
             visualizerHost.ShowVisualizer();
         }
@@ -119,9 +120,9 @@ namespace DebuggerVisualizer.TestHarness
         public static void TestShowNetStandardNonSerializableObjectVisualizer(object objectToVisualize)
         {
             Debugger.Break();
-            var visualizerHost = new VisualizerDevelopmentHost(objectToVisualize: objectToVisualize,
+            var visualizerHost = new VisualizerDevelopmentHost(targetObject: objectToVisualize,
                 visualizer: typeof(NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel.SomeNonSerializableTypeVisualizer),
-                visualizerObjectSource: typeof(NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel.SomeNonSerializableTypeVisualObjectSource));
+                visualizerObjectSourceType: typeof(NetStandard.DebuggerVisualizer.ReadOnlyWithViewModel.SomeNonSerializableTypeVisualObjectSource));
             visualizerHost.ShowVisualizer();
         }
 
