@@ -102,7 +102,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="*" MinWidth="100" >
+                <DataGridTemplateColumn  MinWidth="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock VerticalAlignment="Center" Text="{Binding StrigifiedEntity, Mode=OneWay}" Margin="5,0"></TextBlock>
